@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Yarn
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# React Native / native
+Mobile/ios/Pods/
+Mobile/ios/build/
+Mobile/android/build/
+Mobile/android/app/build/
+Mobile/android/.gradle/
+Mobile/vendor/
+*.apk
+*.aab
+*.ipa
+.DS_Store
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.*
+yarn-error.*
