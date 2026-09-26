@@ -397,7 +397,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  UserCode: 'UserCode'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user"
+    modelProps: "user" | "userCode"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -491,6 +492,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserCode: {
+      payload: Prisma.$UserCodePayload<ExtArgs>
+      fields: Prisma.UserCodeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserCodeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserCodeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload>
+        }
+        findFirst: {
+          args: Prisma.UserCodeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserCodeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload>
+        }
+        findMany: {
+          args: Prisma.UserCodeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload>[]
+        }
+        create: {
+          args: Prisma.UserCodeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload>
+        }
+        createMany: {
+          args: Prisma.UserCodeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserCodeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload>[]
+        }
+        delete: {
+          args: Prisma.UserCodeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload>
+        }
+        update: {
+          args: Prisma.UserCodeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload>
+        }
+        deleteMany: {
+          args: Prisma.UserCodeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserCodeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserCodeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload>[]
+        }
+        upsert: {
+          args: Prisma.UserCodeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserCodePayload>
+        }
+        aggregate: {
+          args: Prisma.UserCodeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserCode>
+        }
+        groupBy: {
+          args: Prisma.UserCodeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserCodeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserCodeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserCodeCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -539,6 +614,14 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UserCodeScalarFieldEnum = {
+  userEmail: 'userEmail',
+  succsesCode: 'succsesCode'
+} as const
+
+export type UserCodeScalarFieldEnum = (typeof UserCodeScalarFieldEnum)[keyof typeof UserCodeScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -770,6 +853,7 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  userCode?: Prisma.UserCodeOmit
 }
 
 /* Types for Logging */

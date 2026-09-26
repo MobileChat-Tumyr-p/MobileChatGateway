@@ -17,3 +17,8 @@ model User {
 
   @@map("user")
 }
+model UserCode {
+    userEmail String @unique @map("user_email")
+    succsesCode Int  @map("succses_code")
+    @@map("user_code")
+} 
