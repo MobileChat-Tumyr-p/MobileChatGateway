@@ -7,6 +7,7 @@ import { PrismaModule } from './prisma/prisma.module.js';
 import { RegModule } from './reg/reg.module.js';
 import { SingInModule } from './sing-in/sing-in.module.js';
 import { SendCodeModule } from './module/send-code/send-code.module.js';
+import { VerifyCodeModule } from './verify-code/verify-code.module.js';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { SendCodeModule } from './module/send-code/send-code.module.js';
     RegModule,
     SingInModule,
     SendCodeModule,
+    VerifyCodeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

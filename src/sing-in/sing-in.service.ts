@@ -14,6 +14,10 @@ export class SingInService {
       throw new UnauthorizedException('Невірне ім\'я або пароль');
     }
 
+    if (!user.confirmed) {
+      throw new UnauthorizedException('Пошту не підтверджено');
+    }
+
     const { password: _password, ...result } = user;
     return result;
   }
