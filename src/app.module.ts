@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
+import { AuthModule } from './auth/auth.module.js';
 import { PrismaModule } from './prisma/prisma.module.js';
 import { RegModule } from './reg/reg.module.js';
 import { SingInModule } from './sing-in/sing-in.module.js';
@@ -13,6 +14,7 @@ import { VerifyCodeModule } from './verify-code/verify-code.module.js';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
+    AuthModule,
     RegModule,
     SingInModule,
     SendCodeModule,
