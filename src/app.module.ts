@@ -9,6 +9,7 @@ import { RegModule } from './reg/reg.module.js';
 import { SingInModule } from './sing-in/sing-in.module.js';
 import { SendCodeModule } from './module/send-code/send-code.module.js';
 import { VerifyCodeModule } from './verify-code/verify-code.module.js';
+import { SearchPeopleModule } from './module/search-people/search-people.module.js';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { VerifyCodeModule } from './verify-code/verify-code.module.js';
     SingInModule,
     SendCodeModule,
     VerifyCodeModule,
+    SearchPeopleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
