@@ -8,10 +8,23 @@ import { RegDto } from './dto/reg.dto.js';
 export class RegService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async register({ name, email, password }: RegDto) {
+  async register({ name, nick, email, password }: RegDto) {
+    const [emailTaken, nickTaken] = await Promise.all([
+      this.prisma.user.findUnique({ where: { email } }),
+      this.prisma.user.findUnique({ where: { nick } }),
+    ]);
+
+    if (emailTaken) {
+      throw new ConflictException('Ця пошта вже зареєстрована');
+    }
+
+    if (nickTaken) {
+      throw new ConflictException('Цей нік вже зайнятий');
+    }
+
     try {
       const user = await this.prisma.user.create({
-        data: { name, email, password },
+        data: { name, nick, email, password },
       });
 
       const { password: _password, ...result } = user;
@@ -21,7 +34,7 @@ export class RegService {
         err instanceof Prisma.PrismaClientKnownRequestError &&
         err.code === 'P2002'
       ) {
-        throw new ConflictException('Ця пошта вже зареєстрована');
+        throw new ConflictException('Пошта або нік вже зайняті');
       }
       throw err;
     }
