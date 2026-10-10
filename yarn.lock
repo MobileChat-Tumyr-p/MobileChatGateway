@@ -1245,14 +1245,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tumy/mobile-chat-grpc@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "@tumy/mobile-chat-grpc@npm:1.0.7"
+"@tumy/mobile-chat-grpc@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@tumy/mobile-chat-grpc@npm:1.1.3"
   dependencies:
     "@nestjs/microservices": ^12.1.0
     rxjs: ^7.8.2
     ts-proto: ^2.12.4
-  checksum: 79cedcd4dc206f677124cb7a63c066ead1aa5c16a97ba893061cf08c963f1b0a93ac510ff17ca93f7e44d73027880e03b121d85f3d2a0e3bae75afb8902a77cc
+  checksum: 579a01d3d117a6011b3b2339952786336ae2d4825ba2bae5868747e9b65b9ac08b04d1c398e3778bb68d0df1da9c798db67503c81f89cfe12b246e768bf2c76e
   languageName: node
   linkType: hard
 
@@ -3400,7 +3400,7 @@ __metadata:
     "@nestjs/swagger": ^12.0.2
     "@prisma/adapter-pg": ^7.10.0
     "@prisma/client": ^7.10.0
-    "@tumy/mobile-chat-grpc": ^1.0.7
+    "@tumy/mobile-chat-grpc": ^1.1.3
     "@types/express": ^5.0.0
     "@types/node": ^24.0.0
     "@types/passport": ^1.0.17

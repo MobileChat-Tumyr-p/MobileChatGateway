@@ -10,6 +10,7 @@ import { SingInModule } from './sing-in/sing-in.module.js';
 import { SendCodeModule } from './module/send-code/send-code.module.js';
 import { VerifyCodeModule } from './verify-code/verify-code.module.js';
 import { SearchPeopleModule } from './module/search-people/search-people.module.js';
+import { ChatModule } from './module/chat/chat.module.js';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { SearchPeopleModule } from './module/search-people/search-people.module.
     SendCodeModule,
     VerifyCodeModule,
     SearchPeopleModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
