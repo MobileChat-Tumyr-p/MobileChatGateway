@@ -14,7 +14,7 @@ export class SendCodeController {
   @Post('/send-code')
   @HttpCode(HttpStatus.OK)
   public async sendCode(@Body() data: SendCodeDTO) {
-    const { code } = await firstValueFrom(this.client.SendSuccess(data));
+    const { code } = await firstValueFrom(this.client.sendSuccess(data));
 
     await this.prisma.userCode.upsert({
       where: { userEmail: data.email },

@@ -20,7 +20,7 @@ export class SendCodeClientsGrpc {
       this.client.getService<SuccessServiceClient>('SuccessService');
   }
 
-  public SendSuccess(request:SendSuccessRequest){
+  public sendSuccess(request:SendSuccessRequest){
     return this.sendCodeService.sendSuccess(request);
   }
 } 
