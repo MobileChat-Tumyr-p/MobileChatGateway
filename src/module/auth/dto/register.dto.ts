@@ -1,15 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
-import { NickDto } from '../../auth/dto/nick.dto.js';
-
-export class RegDto extends NickDto {
-  @ApiProperty({ description: 'Ім\'я користувача' })
+export class RegisterDto {
+  @ApiProperty({ description: "Ім'я користувача" })
   @IsString()
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty({ description: 'Пошта користувача' })
+  @ApiProperty({ description: 'Нікнейм' })
+  @IsString()
+  @IsNotEmpty()
+  nick: string;
+
+  @ApiProperty({ description: 'Пошта' })
   @IsEmail()
   @IsNotEmpty()
   email: string;

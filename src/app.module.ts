@@ -3,25 +3,21 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
-import { AuthModule } from './auth/auth.module.js';
-import { PrismaModule } from './prisma/prisma.module.js';
-import { RegModule } from './reg/reg.module.js';
-import { SingInModule } from './sing-in/sing-in.module.js';
 import { SendCodeModule } from './module/send-code/send-code.module.js';
-import { VerifyCodeModule } from './verify-code/verify-code.module.js';
 import { SearchPeopleModule } from './module/search-people/search-people.module.js';
 import { ChatModule } from './module/chat/chat.module.js';
+import { AuthClientModule } from './module/auth/auth.module.js';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    PrismaModule,
-    AuthModule,
-    RegModule,
-    SingInModule,
+    // Auth — тепер окремий мікросервіс, Gateway лише проксі через gRPC
+    AuthClientModule,
+    // Надсилання кодів на пошту — окремий мікросервіс (MobileChatBackend)
     SendCodeModule,
-    VerifyCodeModule,
+    // Пошук людей
     SearchPeopleModule,
+    // Чати
     ChatModule,
   ],
   controllers: [AppController],

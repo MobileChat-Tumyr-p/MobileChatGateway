@@ -2,20 +2,26 @@ import { Module } from '@nestjs/common';
 import { SendCodeController } from './send-code.controller.js';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
-import { SendCodeClientsGrpc} from './send-code.grcp.js';
+import { SendCodeClientRmq } from './send-code.rmq.js';
 
 @Module({
   imports: [
     ClientsModule.registerAsync([
       {
-        name: 'SEND_CODE_PACKAGE',
+        name: 'MAIL_SERVICE_RMQ',
         useFactory: (configService: ConfigService) => ({
-          transport: Transport.GRPC,
+          transport: Transport.RMQ,
           options: {
-            package: 'success.v1',
-            protoPath:
-              'node_modules/@tumy/mobile-chat-grpc/proto/successgmail.proto',
-            url: configService.getOrThrow<string>('URL'),
+            urls: [
+              configService.get<string>(
+                'RABBITMQ_URL',
+                'amqp://guest:guest@localhost:5672',
+              ),
+            ],
+            queue: 'mail_queue',
+            queueOptions: {
+              durable: false,
+            },
           },
         }),
         inject: [ConfigService],
@@ -23,6 +29,7 @@ import { SendCodeClientsGrpc} from './send-code.grcp.js';
     ]),
   ],
   controllers: [SendCodeController],
-  providers: [SendCodeClientsGrpc],
+  providers: [SendCodeClientRmq],
+  exports: [SendCodeClientRmq],
 })
 export class SendCodeModule {}

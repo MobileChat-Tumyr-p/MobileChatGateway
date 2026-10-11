@@ -1245,14 +1245,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tumy/mobile-chat-grpc@npm:^1.1.4":
-  version: 1.1.4
-  resolution: "@tumy/mobile-chat-grpc@npm:1.1.4"
+"@tumy/mobile-chat-grpc@npm:1.1.5":
+  version: 1.1.5
+  resolution: "@tumy/mobile-chat-grpc@npm:1.1.5"
   dependencies:
     "@nestjs/microservices": ^12.1.0
     rxjs: ^7.8.2
     ts-proto: ^2.12.4
-  checksum: b6be2add7c2533e35bb77370bf1fc3b23214a1ff476f322337858cf771776cba2b2ac19d02bb0a4b8426a6450c55a68b36bd4ed326b667b093b59db1c68a7b5b
+  checksum: c365fe7903efd79ba7d02e91a6a583118f9652c68ec5abf4cab53858ddbb917614f506b227e8d4b7232f2f72d6d8efbaa36797ec9a41ead10980eee3442ef43e
   languageName: node
   linkType: hard
 
@@ -1720,6 +1720,24 @@ __metadata:
     json-schema-traverse: ^1.0.0
     require-from-string: ^2.0.2
   checksum: 4f18ca5fcccff8c8b9a4d6f1a6a3a70ffc888e787624ca66f2d0162e04e8f9f2d289d8a1acdb9520d18bffcee975e7a789a9f8292b5c2c577c408cd2c3308cad
+  languageName: node
+  linkType: hard
+
+"amqp-connection-manager@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "amqp-connection-manager@npm:5.0.0"
+  dependencies:
+    promise-breaker: ^6.0.0
+  peerDependencies:
+    amqplib: "*"
+  checksum: 063bc83fdb891ceb65801c3859b146bd6a976352809f4a0e5f76ed6445b9319a2a74b84b0bc4ad6681cda8410861cdb72445ceefe3fe3927b7fa24bd44f84361
+  languageName: node
+  linkType: hard
+
+"amqplib@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "amqplib@npm:2.2.0"
+  checksum: a4907e338cfb18c58f9c76d3ed6482b8f07203cf6c8675b1b2b0836601153b3b869b90b995b5be9013334eba65bedad160dfbc072a4c4269ce1199518eb60d60
   languageName: node
   linkType: hard
 
@@ -3400,12 +3418,14 @@ __metadata:
     "@nestjs/swagger": ^12.0.2
     "@prisma/adapter-pg": ^7.10.0
     "@prisma/client": ^7.10.0
-    "@tumy/mobile-chat-grpc": ^1.1.4
+    "@tumy/mobile-chat-grpc": 1.1.5
     "@types/express": ^5.0.0
     "@types/node": ^24.0.0
     "@types/passport": ^1.0.17
     "@types/passport-jwt": ^4.0.1
     "@types/swagger-ui-express": ^4.1.8
+    amqp-connection-manager: ^5.0.0
+    amqplib: ^2.2.0
     class-transformer: ^0.5.1
     class-validator: ^0.15.1
     dotenv: ^18.0.3
@@ -3944,6 +3964,13 @@ __metadata:
   bin:
     prisma: build/index.js
   checksum: eaa873906bed2fe41a3ba4c29a861b15a7ae7cda0e662ee5155928075fbbe8c7308e61a7d6a55c0b9469fa6429679f9a2da525397d4af8d44846e8e3de3b0d67
+  languageName: node
+  linkType: hard
+
+"promise-breaker@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "promise-breaker@npm:6.0.0"
+  checksum: 84939eb36b30ad39c141350f15d42fcfcfdeea0c4f288cf4d7b794450cc93823ea211ab76fa9edcda9ddc880f62829a63630ff04ff76f0c611b6f31a73a0a000
   languageName: node
   linkType: hard
 
