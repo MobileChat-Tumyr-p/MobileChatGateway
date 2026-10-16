@@ -1,13 +1,13 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { SendCodeClientRmq } from './send-code.rmq.js';
 import { SendCodeDTO } from './dto/SendCode.dto.js';
-import { PrismaService } from '../../prisma/prisma.service.js';
+import { AuthClientGrpc } from '../auth/auth.grpc.js';
 
 @Controller()
 export class SendCodeController {
   public constructor(
     private readonly client: SendCodeClientRmq,
-    private readonly prisma: PrismaService,
+    private readonly authClient: AuthClientGrpc,
   ) {}
 
   @Post('/send-code')
@@ -15,16 +15,7 @@ export class SendCodeController {
   public async sendCode(@Body() data: SendCodeDTO) {
     const { code } = await this.client.sendCode(data);
 
-    await this.prisma.userCode.upsert({
-      where: { userEmail: data.email },
-      create: {
-        userEmail: data.email,
-        succsesCode: code,
-      },
-      update: {
-        succsesCode: code,
-      },
-    });
+    await this.authClient.saveCode({ email: data.email, code });
 
     return { code };
   }

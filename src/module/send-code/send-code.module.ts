@@ -3,9 +3,11 @@ import { SendCodeController } from './send-code.controller.js';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { SendCodeClientRmq } from './send-code.rmq.js';
+import { AuthClientModule } from '../auth/auth.module.js';
 
 @Module({
   imports: [
+    AuthClientModule,
     ClientsModule.registerAsync([
       {
         name: 'MAIL_SERVICE_RMQ',
