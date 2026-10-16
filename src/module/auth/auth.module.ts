@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { AuthClientGrpc } from './auth.grpc.js';
 import { AuthController } from './auth.controller.js';
+import { AuthAccountController } from './auth-account.controller.js';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { AuthController } from './auth.controller.js';
       },
     ]),
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, AuthAccountController],
   providers: [AuthClientGrpc],
   exports: [AuthClientGrpc],
 })
