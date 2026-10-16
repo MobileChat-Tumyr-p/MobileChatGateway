@@ -3,9 +3,11 @@ import { ChatController } from './chat.controller.js';
 import { ChatClientGRCP } from './chat.grcp.js';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
+import { AuthClientModule } from '../auth/auth.module.js';
 
 @Module({
   imports: [
+    AuthClientModule,
     ClientsModule.registerAsync([
       {
         name: 'CHAT_PACKAGE',

@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
+import { PrismaModule } from './prisma/prisma.module.js';
 import { SendCodeModule } from './module/send-code/send-code.module.js';
 import { SearchPeopleModule } from './module/search-people/search-people.module.js';
 import { ChatModule } from './module/chat/chat.module.js';
@@ -11,6 +12,7 @@ import { AuthClientModule } from './module/auth/auth.module.js';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule,
     // Auth — тепер окремий мікросервіс, Gateway лише проксі через gRPC
     AuthClientModule,
     // Надсилання кодів на пошту — окремий мікросервіс (MobileChatBackend)
