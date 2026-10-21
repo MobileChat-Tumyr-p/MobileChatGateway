@@ -5,9 +5,12 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module.js';
+import { RpcExceptionFilter } from './common/rpc-exception.filter.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalFilters(new RpcExceptionFilter());
 
   app.enableCors({
     origin: ['http://localhost:8080'],
