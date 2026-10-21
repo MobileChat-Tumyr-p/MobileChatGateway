@@ -15,7 +15,10 @@ import { AuthClientModule } from '../auth/auth.module.js';
           transport: Transport.GRPC,
           options: {
             package: 'chat.v1',
-            protoPath: 'node_modules/@tumy/mobile-chat-grpc/proto/chat.proto',
+            protoPath: [
+              'node_modules/@tumy/mobile-chat-grpc/proto/chat.proto',
+              'node_modules/@tumy/mobile-chat-grpc/proto/messages.proto',
+            ],
             url: configService.getOrThrow<string>('URL'),
           },
         }),

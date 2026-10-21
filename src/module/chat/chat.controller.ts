@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import type { Request } from 'express';
 
 import { ChatClientGRCP } from './chat.grcp.js';
@@ -9,6 +18,10 @@ type AuthenticatedRequest = Request & { user: { id: number } };
 type CreateChatBody = {
   title?: string;
   memberIds?: number[];
+};
+
+type SendMessageBody = {
+  text?: string;
 };
 
 @Controller('chats')
@@ -34,5 +47,24 @@ export class ChatController {
       body.title ?? '',
       body.memberIds ?? [],
     );
+  }
+
+  @UseGuards(AuthGuard)
+  @Post(':id/messages')
+  public async sendMessage(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: SendMessageBody,
+    @Req() request: AuthenticatedRequest,
+  ) {
+    return this.chatClient.sendMessage(id, request.user.id, body.text ?? '');
+  }
+
+  @UseGuards(AuthGuard)
+  @Get(':id/messages')
+  public async getMessages(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() request: AuthenticatedRequest,
+  ) {
+    return this.chatClient.getMessages(id, request.user.id);
   }
 }

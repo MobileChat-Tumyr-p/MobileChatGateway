@@ -11,9 +11,11 @@ import {
   SaveCodeRequest,
   VerifyCodeRequest,
   UpdateNickRequest,
+  SearchPeopleRequest,
   AuthResponse,
   TokensResponse,
   UserResponse,
+  UserPreviewList,
   Empty,
 } from '@tumy/mobile-chat-grpc/gen/auth.js';
 
@@ -57,5 +59,9 @@ export class AuthClientGrpc implements OnModuleInit {
 
   updateNick(data: UpdateNickRequest): Promise<UserResponse> {
     return firstValueFrom(this.authService.updateNick(data));
+  }
+
+  searchPeople(data: SearchPeopleRequest): Promise<UserPreviewList> {
+    return firstValueFrom(this.authService.searchPeople(data));
   }
 }
