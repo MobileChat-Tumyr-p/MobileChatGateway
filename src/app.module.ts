@@ -8,6 +8,7 @@ import { SendCodeModule } from './module/send-code/send-code.module.js';
 import { SearchPeopleModule } from './module/search-people/search-people.module.js';
 import { ChatModule } from './module/chat/chat.module.js';
 import { AuthClientModule } from './module/auth/auth.module.js';
+import { CallsModule } from './module/calls/calls.module.js';
 
 @Module({
   imports: [
@@ -21,6 +22,8 @@ import { AuthClientModule } from './module/auth/auth.module.js';
     SearchPeopleModule,
     // Чати
     ChatModule,
+    // Дзвінки: REST + WS сигналінг + LiveKit
+    CallsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
