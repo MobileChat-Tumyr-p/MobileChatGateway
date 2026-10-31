@@ -2,6 +2,7 @@ import { BadRequestException, ForbiddenException, Injectable, NotFoundException 
 import { randomUUID } from 'node:crypto';
 
 import { PrismaService } from '../../prisma/prisma.service.js';
+import { PresenceService } from '../presence/presence.service.js';
 import { LiveKitService } from './livekit.service.js';
 import { CallsGateway } from './calls.gateway.js';
 
@@ -21,6 +22,7 @@ const ENDED = 'ended';
 /**
  * Стан дзвінків зберігається в БД Gateway (модель Call),
  * realtime-події — через CallsGateway (socket.io),
+ * присутність — через PresenceService (спільна для '/' та '/chat'),
  * медіа — напряму між клієнтами та LiveKit-сервером.
  */
 @Injectable()
@@ -29,6 +31,7 @@ export class CallsService {
     private readonly prisma: PrismaService,
     private readonly livekit: LiveKitService,
     private readonly callsGateway: CallsGateway,
+    private readonly presence: PresenceService,
   ) {}
 
   public async start(
@@ -40,7 +43,7 @@ export class CallsService {
       throw new BadRequestException('Не можна дзвонити самому собі');
     }
 
-    if (!this.callsGateway.isOnline(calleeId)) {
+    if (!this.presence.isOnline(calleeId)) {
       throw new NotFoundException('Користувач не в мережі');
     }
 
