@@ -9,6 +9,7 @@ import { SearchPeopleModule } from './module/search-people/search-people.module.
 import { ChatModule } from './module/chat/chat.module.js';
 import { AuthClientModule } from './module/auth/auth.module.js';
 import { CallsModule } from './module/calls/calls.module.js';
+import { PresenceModule } from './module/presence/presence.module.js';
 
 @Module({
   imports: [
@@ -24,6 +25,8 @@ import { CallsModule } from './module/calls/calls.module.js';
     ChatModule,
     // Дзвінки: REST + WS сигналінг + LiveKit
     CallsModule,
+    // Присутність (online/last seen) для обох WS-namespace
+    PresenceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
