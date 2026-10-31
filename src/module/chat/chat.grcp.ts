@@ -1,6 +1,12 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import type { ClientGrpc } from '@nestjs/microservices';
-import { getChatListServiceClient } from '@tumy/mobile-chat-grpc/gen/chat.js';
+import { getChatListServiceClient, getChatMembersServiceClient, directChatServiceClient } from '@tumy/mobile-chat-grpc/gen/chat.js';
+import type {
+  ChatMembers,
+  GetChatMembersRequest,
+  DirectChatRequest,
+  DirectChatResponse,
+} from '@tumy/mobile-chat-grpc/gen/chat.js';
 import {
   createChatClient,
   type CreateChatResponse,
@@ -19,6 +25,8 @@ export class ChatClientGRCP implements OnModuleInit {
   private createChatService: createChatClient;
   private sendMessageService: sendMessageClient;
   private getMessagesService: getMessagesClient;
+  private getChatMembersService: getChatMembersServiceClient;
+  private directChatService: directChatServiceClient;
 
   public constructor(
     @Inject('CHAT_PACKAGE') private readonly client: ClientGrpc,
@@ -35,6 +43,10 @@ export class ChatClientGRCP implements OnModuleInit {
       this.client.getService<sendMessageClient>('sendMessage');
     this.getMessagesService =
       this.client.getService<getMessagesClient>('getMessages');
+    this.getChatMembersService =
+      this.client.getService<getChatMembersServiceClient>('getChatMembersService');
+    this.directChatService =
+      this.client.getService<directChatServiceClient>('directChatService');
   }
 
   public getChat(userId: number) {
@@ -53,6 +65,18 @@ export class ChatClientGRCP implements OnModuleInit {
 
   public getMessages(chatId: number, userId: number): Promise<MessageList> {
     return firstValueFrom(this.getMessagesService.get({ chatId, userId }));
+  }
+
+  public getChatMembers(chatId: number, userId: number): Promise<ChatMembers> {
+    const request = { chatId, userId } as GetChatMembersRequest;
+
+    return firstValueFrom(this.getChatMembersService.getChatMembers(request));
+  }
+
+  public ensureDirectChat(userId: number, peerId: number): Promise<DirectChatResponse> {
+    const request = { userId, peerId } as DirectChatRequest;
+
+    return firstValueFrom(this.directChatService.ensureDirectChat(request));
   }
 
   public createChat(
