@@ -17,6 +17,7 @@ import {
   type MessageList,
   type MessageResponse,
 } from '@tumy/mobile-chat-grpc/gen/messages.js';
+import type { GetMessagesRequest } from '@tumy/mobile-chat-grpc/gen/messages.js';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -63,8 +64,15 @@ export class ChatClientGRCP implements OnModuleInit {
     );
   }
 
-  public getMessages(chatId: number, userId: number): Promise<MessageList> {
-    return firstValueFrom(this.getMessagesService.get({ chatId, userId }));
+  public getMessages(
+    chatId: number,
+    userId: number,
+    limit = 0,
+    offset = 0,
+  ): Promise<MessageList> {
+    const request = { chatId, userId, limit, offset } as GetMessagesRequest;
+
+    return firstValueFrom(this.getMessagesService.get(request));
   }
 
   public getChatMembers(chatId: number, userId: number): Promise<ChatMembers> {
