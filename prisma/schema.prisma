@@ -23,4 +23,18 @@ model UserCode {
     userEmail String @unique @map("user_email")
     succsesCode Int  @map("succses_code")
     @@map("user_code")
-} 
+}
+
+model Call {
+  id        String   @id @default(uuid()) @map("id")
+  callerId  Int      @map("caller_id")
+  calleeId  Int      @map("callee_id")
+  room      String   @map("room")
+  status    String   @default("ringing") @map("status")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([calleeId, status])
+  @@index([callerId, status])
+  @@map("call")
+}
