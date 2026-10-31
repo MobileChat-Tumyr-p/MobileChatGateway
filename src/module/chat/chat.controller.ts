@@ -6,6 +6,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -167,8 +168,18 @@ export class ChatController {
   @Get(':id/messages')
   public async getMessages(
     @Param('id', ParseIntPipe) id: number,
+    @Query('limit') limitQuery: string | undefined,
+    @Query('offset') offsetQuery: string | undefined,
     @Req() request: AuthenticatedRequest,
   ) {
-    return this.chatClient.getMessages(id, request.user.id);
+    const limit = Number(limitQuery ?? 0);
+    const offset = Number(offsetQuery ?? 0);
+
+    return this.chatClient.getMessages(
+      id,
+      request.user.id,
+      Number.isFinite(limit) ? limit : 0,
+      Number.isFinite(offset) ? offset : 0,
+    );
   }
 }
