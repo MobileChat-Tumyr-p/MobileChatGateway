@@ -10,4 +10,5 @@
  */
 export type * from './models/User.js'
 export type * from './models/UserCode.js'
+export type * from './models/Call.js'
 export type * from './commonInputTypes.js'
