@@ -89,6 +89,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bufbuild/protobuf@npm:^1.10.0, @bufbuild/protobuf@npm:^1.10.1":
+  version: 1.10.1
+  resolution: "@bufbuild/protobuf@npm:1.10.1"
+  checksum: 403838ad278d504e33e72ec0f64ce1bac9f5025ee6396253382e821a1fe0c371a58ffe45a0e8f23306205b6890c5f83e85828168a35dae118915cd4c3d091177
+  languageName: node
+  linkType: hard
+
 "@bufbuild/protobuf@npm:^2.0.0, @bufbuild/protobuf@npm:^2.14.1":
   version: 2.15.0
   resolution: "@bufbuild/protobuf@npm:2.15.0"
@@ -409,6 +416,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@livekit/protocol@npm:1.51.0":
+  version: 1.51.0
+  resolution: "@livekit/protocol@npm:1.51.0"
+  dependencies:
+    "@bufbuild/protobuf": ^1.10.0
+  checksum: 0ed63891a0e10a495849dcd84f16efdf90a8edd41cb37f736449ba90a0ce9e04ba7365b462c59fa3cebb145050abf7ce450a3cf69c1c04cf7b47ef440d9fb2b8
+  languageName: node
+  linkType: hard
+
 "@lukeed/csprng@npm:^1.0.0":
   version: 1.1.0
   resolution: "@lukeed/csprng@npm:1.1.0"
@@ -655,6 +671,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nestjs/platform-socket.io@npm:^12":
+  version: 12.2.0
+  resolution: "@nestjs/platform-socket.io@npm:12.2.0"
+  dependencies:
+    socket.io: 4.8.4
+    tslib: 2.8.1
+  peerDependencies:
+    "@nestjs/common": ^12.0.0
+    "@nestjs/websockets": ^12.0.0
+    rxjs: ^7.1.0
+  checksum: 5d9442eaf89830624d3fc0769c66716550ca6ac4f32d608618015815983428783106ac899d18f7e03146c3895885ccfe65e59a31e753a41da7e25ac4034c8c5c
+  languageName: node
+  linkType: hard
+
 "@nestjs/schematics@npm:^12.0.0":
   version: 12.0.5
   resolution: "@nestjs/schematics@npm:12.0.5"
@@ -703,6 +733,26 @@ __metadata:
     typescript:
       optional: true
   checksum: 3d111f33b450b1909ae9ecc7310d5cd98c4ecf438f18043a848cdc22dbfd6c5c4a957e33157fba04f68fef015541239f48dd181607c1811bc6a6087c6bc691d8
+  languageName: node
+  linkType: hard
+
+"@nestjs/websockets@npm:^12":
+  version: 12.2.0
+  resolution: "@nestjs/websockets@npm:12.2.0"
+  dependencies:
+    iterare: 1.2.1
+    object-hash: 3.0.0
+    tslib: 2.8.1
+  peerDependencies:
+    "@nestjs/common": ^12.0.0
+    "@nestjs/core": ^12.0.0
+    "@nestjs/platform-socket.io": ^12.0.0
+    reflect-metadata: ^0.1.12 || ^0.2.0
+    rxjs: ^7.1.0
+  peerDependenciesMeta:
+    "@nestjs/platform-socket.io":
+      optional: true
+  checksum: 539830c085f72c25caec67176b65022c1c2016baf15587694f860befe1b5360203dca66688a5af2c144279f7eb76355df429d0f437501f820389682a378115e8
   languageName: node
   linkType: hard
 
@@ -1221,6 +1271,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@socket.io/component-emitter@npm:~3.1.0":
+  version: 3.1.2
+  resolution: "@socket.io/component-emitter@npm:3.1.2"
+  checksum: 89888f00699eb34e3070624eb7b8161fa29f064aeb1389a48f02195d55dd7c52a504e52160016859f6d6dffddd54324623cdd47fd34b3d46f9ed96c18c456edc
+  languageName: node
+  linkType: hard
+
 "@standard-schema/spec@npm:1.1.0, @standard-schema/spec@npm:^1.0.0":
   version: 1.1.0
   resolution: "@standard-schema/spec@npm:1.1.0"
@@ -1245,14 +1302,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tumy/mobile-chat-grpc@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@tumy/mobile-chat-grpc@npm:1.4.0"
+"@tumy/mobile-chat-grpc@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@tumy/mobile-chat-grpc@npm:1.6.0"
   dependencies:
     "@nestjs/microservices": ^12.1.0
     rxjs: ^7.8.2
     ts-proto: ^2.12.4
-  checksum: 4362a0823c614146374b1c37a436c3aa38f12954b13ff28d70b306713ffc115ae67bfdcbbf0ac89b1970ec7fc0f47a8e6160e2d606abb2a64bb1e823dca79703
+  checksum: 28bbd97b97df7c2177754c7ac838b2fe6ab8bdb0c0cfddd35977fb079db939b3b27b3e068435b5cd627962041f9bcf05350e647303d457127108873ec6f22fa0
   languageName: node
   linkType: hard
 
@@ -1272,6 +1329,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 7eb1bc5342a9604facd57598a6c62621e244822442976c443efb84ff745246b10d06e8b309b6e80130026a396f19bf6793b7cecd7380169f369dac3bfc46fb99
+  languageName: node
+  linkType: hard
+
+"@types/cors@npm:^2.8.12":
+  version: 2.8.19
+  resolution: "@types/cors@npm:2.8.19"
+  dependencies:
+    "@types/node": "*"
+  checksum: 9545cc532c9218754443f48a0c98c1a9ba4af1fe54a3425c95de75ff3158147bb39e666cb7c6bf98cc56a9c6dc7b4ce5b2cbdae6b55d5942e50c81b76ed6b825
   languageName: node
   linkType: hard
 
@@ -1444,6 +1510,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:>=10.0.0":
+  version: 26.6.5
+  resolution: "@types/node@npm:26.6.5"
+  dependencies:
+    undici-types: ~8.9.0
+  checksum: 3f7c73324d52cd7aaa0ae45a9a136228b59a2a3002fbea1377e2b949a0ea013ee792d46665dd9eff466f8bbe454560ac95c95ad950469b137c242bdeb88ae7e3
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:>=13.7.0":
   version: 26.6.3
   resolution: "@types/node@npm:26.6.3"
@@ -1558,6 +1633,15 @@ __metadata:
   version: 13.15.10
   resolution: "@types/validator@npm:13.15.10"
   checksum: 6a1964a617fdd9967d15e7ce1e6231255febe4e9fc2a6c381471b47a0f26d19b3309f0c15448cdeaf46e8f3d0e4baf49ed1181b2aef57b90ceace4f010eee2f3
+  languageName: node
+  linkType: hard
+
+"@types/ws@npm:^8.5.12":
+  version: 8.18.2
+  resolution: "@types/ws@npm:8.18.2"
+  dependencies:
+    "@types/node": "*"
+  checksum: 6b92ac97d46f9f7c87c209c28d7c10fc762dd8604e2e5440239ff6eb33410dc142a16d84c76943295f35f29294e67f97f8390f785c60f30308c4c302368b85ee
   languageName: node
   linkType: hard
 
@@ -1694,6 +1778,16 @@ __metadata:
     mime-types: ^3.0.0
     negotiator: ^1.0.0
   checksum: 49fe6c050cb6f6ff4e771b4d88324fca4d3127865f2473872e818dca127d809ba3aa8fdfc7acb51dd3c5bade7311ca6b8cfff7015ea6db2f7eb9c8444d223a4f
+  languageName: node
+  linkType: hard
+
+"accepts@npm:~1.3.4":
+  version: 1.3.8
+  resolution: "accepts@npm:1.3.8"
+  dependencies:
+    mime-types: ~2.1.34
+    negotiator: 0.6.3
+  checksum: 50c43d32e7b50285ebe84b613ee4a3aa426715a7d131b65b786e2ead0fd76b6b60091b9916d3478a75f11f162628a2139991b6c03ab3f1d9ab7c86075dc8eab4
   languageName: node
   linkType: hard
 
@@ -2212,14 +2306,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:^0.7.1":
+"cookie@npm:^0.7.1, cookie@npm:~0.7.2":
   version: 0.7.2
   resolution: "cookie@npm:0.7.2"
   checksum: 9bf8555e33530affd571ea37b615ccad9b9a34febbf2c950c86787088eb00a8973690833b0f8ebd6b69b753c62669ea60cec89178c1fb007bf0749abed74f93e
   languageName: node
   linkType: hard
 
-"cors@npm:2.8.6":
+"cors@npm:2.8.6, cors@npm:~2.8.5":
   version: 2.8.6
   resolution: "cors@npm:2.8.6"
   dependencies:
@@ -2360,7 +2454,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^4.4.0, debug@npm:^4.4.3":
+"debug@npm:^4.4.0, debug@npm:^4.4.3, debug@npm:~4.4.1":
   version: 4.4.3
   resolution: "debug@npm:4.4.3"
   dependencies:
@@ -2537,6 +2631,30 @@ __metadata:
   version: 2.0.0
   resolution: "encodeurl@npm:2.0.0"
   checksum: abf5cd51b78082cf8af7be6785813c33b6df2068ce5191a40ca8b1afe6a86f9230af9a9ce694a5ce4665955e5c1120871826df9c128a642e09c58d592e2807fe
+  languageName: node
+  linkType: hard
+
+"engine.io-parser@npm:~5.2.1":
+  version: 5.2.3
+  resolution: "engine.io-parser@npm:5.2.3"
+  checksum: a76d998b794ce8bbcade833064d949715781fdb9e9cf9b33ecf617d16355ddfd7772f12bb63aaec0f497d63266c6db441129c5aa24c60582270f810c696a6cf8
+  languageName: node
+  linkType: hard
+
+"engine.io@npm:~6.6.0":
+  version: 6.6.11
+  resolution: "engine.io@npm:6.6.11"
+  dependencies:
+    "@types/cors": ^2.8.12
+    "@types/node": ">=10.0.0"
+    "@types/ws": ^8.5.12
+    accepts: ~1.3.4
+    cookie: ~0.7.2
+    cors: ~2.8.5
+    debug: ~4.4.1
+    engine.io-parser: ~5.2.1
+    ws: ~8.21.0
+  checksum: 32f6fec67c370e13bcd153f72ffb61289be2255f5dd7c44397d0f217df8e53b6ffbd31584dc8a4a98550835e49e55d59ece60653cf7e08d327e2b4babc94ba88
   languageName: node
   linkType: hard
 
@@ -3106,6 +3224,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jose@npm:^5.1.2":
+  version: 5.10.0
+  resolution: "jose@npm:5.10.0"
+  checksum: e80965ef3ab47baafac3517f53fa9c74b948b57690de524f51320c314cd545ef51ec7b18761605d58fb5965b7c5e12b2bb6ddae87a6ccf55e3f4ad077347d8d7
+  languageName: node
+  linkType: hard
+
 "js-yaml@npm:5.4.2":
   version: 5.4.2
   resolution: "js-yaml@npm:5.4.2"
@@ -3183,6 +3308,17 @@ __metadata:
   version: 1.13.14
   resolution: "libphonenumber-js@npm:1.13.14"
   checksum: 45df9b287336687a553b96c4797ba9799f0d1c3ef3db919e1ec06b8d84d5ce7e2d35ebf65870eff37880f3a7ca1a0a1f5f21f955138c20dad125b25db6dd52eb
+  languageName: node
+  linkType: hard
+
+"livekit-server-sdk@npm:^2":
+  version: 2.19.2
+  resolution: "livekit-server-sdk@npm:2.19.2"
+  dependencies:
+    "@bufbuild/protobuf": ^1.10.1
+    "@livekit/protocol": 1.51.0
+    jose: ^5.1.2
+  checksum: 3f0918cdb5d0d23d6aa0509142287d5e97194b84dcb13163a322c79ee578cd3104020055c7e59bd0198aa8956ff47c3e11b83dcb2a15e4d7a1119094d6ef9dd1
   languageName: node
   linkType: hard
 
@@ -3359,7 +3495,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:~2.1.24":
+"mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
@@ -3414,11 +3550,13 @@ __metadata:
     "@nestjs/microservices": ^12.1.0
     "@nestjs/passport": ^12.0.0
     "@nestjs/platform-express": ^12.0.1
+    "@nestjs/platform-socket.io": ^12
     "@nestjs/schematics": ^12.0.0
     "@nestjs/swagger": ^12.0.2
+    "@nestjs/websockets": ^12
     "@prisma/adapter-pg": ^7.10.0
     "@prisma/client": ^7.10.0
-    "@tumy/mobile-chat-grpc": 1.4.0
+    "@tumy/mobile-chat-grpc": 1.6.0
     "@types/express": ^5.0.0
     "@types/node": ^24.0.0
     "@types/passport": ^1.0.17
@@ -3429,6 +3567,7 @@ __metadata:
     class-transformer: ^0.5.1
     class-validator: ^0.15.1
     dotenv: ^18.0.3
+    livekit-server-sdk: ^2
     oxlint: ^1.58.0
     passport: ^0.7.0
     passport-jwt: ^4.0.1
@@ -3437,6 +3576,7 @@ __metadata:
     prisma: 7.10.0
     reflect-metadata: ^0.2.2
     rxjs: ^7.8.1
+    socket.io: ^4
     source-map-support: ^0.5.21
     swagger-ui-express: ^5.0.1
     typescript: ^6.0.2
@@ -3501,6 +3641,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"negotiator@npm:0.6.3":
+  version: 0.6.3
+  resolution: "negotiator@npm:0.6.3"
+  checksum: b8ffeb1e262eff7968fc90a2b6767b04cfd9842582a9d0ece0af7049537266e7b2506dfb1d107a32f06dd849ab2aea834d5830f7f4d0e5cb7d36e1ae55d021d9
+  languageName: node
+  linkType: hard
+
 "negotiator@npm:^1.0.0":
   version: 1.1.0
   resolution: "negotiator@npm:1.1.0"
@@ -3538,6 +3685,13 @@ __metadata:
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
+  languageName: node
+  linkType: hard
+
+"object-hash@npm:3.0.0":
+  version: 3.0.0
+  resolution: "object-hash@npm:3.0.0"
+  checksum: 80b4904bb3857c52cc1bfd0b52c0352532ca12ed3b8a6ff06a90cd209dfda1b95cee059a7625eb9da29537027f68ac4619363491eedb2f5d3dddbba97494fd6c
   languageName: node
   linkType: hard
 
@@ -4342,6 +4496,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"socket.io-adapter@npm:~2.5.2":
+  version: 2.5.8
+  resolution: "socket.io-adapter@npm:2.5.8"
+  dependencies:
+    debug: ~4.4.1
+    ws: ~8.21.0
+  checksum: 1d03c73dc160a196115efe85b9e673a413b4a80fa9363d4c46069f036d49855d7047cd558d72b06ae63dac55e4f3ade149a0c927c37faa2a7edf3b508f2ed1f9
+  languageName: node
+  linkType: hard
+
+"socket.io-parser@npm:~4.2.4":
+  version: 4.2.7
+  resolution: "socket.io-parser@npm:4.2.7"
+  dependencies:
+    "@socket.io/component-emitter": ~3.1.0
+    debug: ~4.4.1
+  checksum: d4b8ce6f3e437d0ea313bffe5343c136ec83bc0070dc15521753a84bb036cc66d290ba58e45e01232f44ee8fd964d1156a50a3e1a22c37e91c6e52eb16412025
+  languageName: node
+  linkType: hard
+
+"socket.io@npm:4.8.4, socket.io@npm:^4":
+  version: 4.8.4
+  resolution: "socket.io@npm:4.8.4"
+  dependencies:
+    accepts: ~1.3.4
+    cors: ~2.8.5
+    debug: ~4.4.1
+    engine.io: ~6.6.0
+    socket.io-adapter: ~2.5.2
+    socket.io-parser: ~4.2.4
+  checksum: 37b154450528a6935a52953881b423f57368bc44be4a9c282d9ef0ec89811525db89f0e4798970bd1972299765086dc24081bbfb624ab59f20b6ea092f4d3814
+  languageName: node
+  linkType: hard
+
 "source-map-support@npm:^0.5.21":
   version: 0.5.21
   resolution: "source-map-support@npm:0.5.21"
@@ -4777,6 +4965,21 @@ __metadata:
   version: 1.0.2
   resolution: "wrappy@npm:1.0.2"
   checksum: 159da4805f7e84a3d003d8841557196034155008f817172d4e986bd591f74aa82aa7db55929a54222309e01079a65a92a9e6414da5a6aa4b01ee44a511ac3ee5
+  languageName: node
+  linkType: hard
+
+"ws@npm:~8.21.0":
+  version: 8.21.3
+  resolution: "ws@npm:8.21.3"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 8a28a457a997e0d63b5bc4d35344c342c68038c207013196468c35a80f7220397665739026217e836abc40ea7432483de3fee47a64abdedb4e3d0e3f332dc37b
   languageName: node
   linkType: hard
 
