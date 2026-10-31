@@ -32,7 +32,7 @@
     "@nestjs/websockets": "^12",
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.10.0",
-    "@tumy/mobile-chat-grpc": "1.6.0",
+    "@tumy/mobile-chat-grpc": "1.7.0",
     "@types/swagger-ui-express": "^4.1.8",
     "amqp-connection-manager": "^5.0.0",
     "amqplib": "^2.2.0",
