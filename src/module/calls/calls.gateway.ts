@@ -8,6 +8,7 @@ import {
 import type { Server, Socket } from 'socket.io';
 
 import { AuthClientGrpc } from '../auth/auth.grpc.js';
+import { PresenceService } from '../presence/presence.service.js';
 
 type ClientWithUser = Socket & { data: { userId?: number } };
 
@@ -16,7 +17,7 @@ type HandshakeAuth = { token?: string };
 /**
  * WS-шар сигналінгу дзвінків.
  * З'єднання завжди авторизується JWT у handshake.auth.token.
- * Онлайн-клієнти: Map<userId, Set<socketId>>.
+ * Присутність делегована в PresenceService (спільна для '/' та '/chat').
  */
 @WebSocketGateway({
   cors: { origin: ['http://localhost:8080'] },
@@ -24,18 +25,14 @@ type HandshakeAuth = { token?: string };
 })
 export class CallsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private readonly logger = new Logger(CallsGateway.name);
-  private readonly online = new Map<number, Set<string>>();
 
   @WebSocketServer()
   public server: Server | undefined;
 
-  constructor(private readonly authClient: AuthClientGrpc) { }
-
-  public isOnline(userId: number): boolean {
-    const sockets = this.online.get(userId);
-
-    return sockets !== undefined && sockets.size > 0;
-  }
+  constructor(
+    private readonly authClient: AuthClientGrpc,
+    private readonly presence: PresenceService,
+  ) {}
 
   /**
    * Розсилка події всім сокетам користувача (call:incoming, call:accepted, ...).
@@ -47,13 +44,7 @@ export class CallsGateway implements OnGatewayConnection, OnGatewayDisconnect {
       return;
     }
 
-    const socketIds = this.online.get(toUserId);
-
-    if (!socketIds) {
-      return;
-    }
-
-    for (const socketId of socketIds) {
+    for (const socketId of this.presence.getSocketIds(toUserId)) {
       server.to(socketId).emit(event, payload);
     }
   }
@@ -77,9 +68,7 @@ export class CallsGateway implements OnGatewayConnection, OnGatewayDisconnect {
       }
 
       client.data.userId = userId;
-      const sockets = this.online.get(userId) ?? new Set<string>();
-      sockets.add(client.id);
-      this.online.set(userId, sockets);
+      this.presence.register(userId, client.id);
       client.emit('calls:connected', { userId });
     } catch (err) {
       this.logger.warn(`WS: автентифікація не пройшла — відхиляю: ${String(err)}`);
@@ -94,16 +83,6 @@ export class CallsGateway implements OnGatewayConnection, OnGatewayDisconnect {
       return;
     }
 
-    const sockets = this.online.get(userId);
-
-    if (!sockets) {
-      return;
-    }
-
-    sockets.delete(client.id);
-
-    if (sockets.size === 0) {
-      this.online.delete(userId);
-    }
+    this.presence.unregister(userId, client.id);
   }
 }
