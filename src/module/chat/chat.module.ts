@@ -5,10 +5,12 @@ import { ChatGateway } from './chat.gateway.js';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { AuthClientModule } from '../auth/auth.module.js';
+import { PresenceModule } from '../presence/presence.module.js';
 
 @Module({
   imports: [
     AuthClientModule,
+    PresenceModule,
     ClientsModule.registerAsync([
       {
         name: 'CHAT_PACKAGE',
