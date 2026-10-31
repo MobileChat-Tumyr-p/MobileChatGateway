@@ -8,9 +8,18 @@ import {
 import type { Server, Socket } from 'socket.io';
 
 import { AuthClientGrpc } from '../auth/auth.grpc.js';
+import { PresenceService } from '../presence/presence.service.js';
 import { ChatClientGRCP } from './chat.grcp.js';
 
-type ClientWithUser = Socket & { data: { userId?: number } };
+type ClientWithUser = Socket & {
+  data: { userId?: number; chatIds?: number[] };
+};
+
+export type PresenceUpdatePayload = {
+  userId: number;
+  online: boolean;
+  lastSeen: string | null;
+};
 
 type HandshakeAuth = { token?: string };
 
@@ -35,6 +44,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   constructor(
     private readonly authClient: AuthClientGrpc,
     private readonly chatClient: ChatClientGRCP,
+    private readonly presence: PresenceService,
   ) {}
 
   /**
@@ -43,6 +53,20 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
    */
   public broadcastToChat(chatId: number, event: string, payload: unknown): void {
     this.server?.to(`chat:${chatId}`).emit(event, payload);
+  }
+
+  /**
+   * Сповіщення про зміну присутності користувача в кімнатах усіх
+   * спільних чатів (ідентифікатори на сокеті key client.data.chatIds).
+   */
+  public announcePresence(chatIds: number[] | undefined, payload: PresenceUpdatePayload): void {
+    const server = this.server;
+
+    if (!server || !chatIds || chatIds.length === 0) {
+      return;
+    }
+
+    server.to(chatIds.map((chatId) => `chat:${chatId}`)).emit('presence:update', payload);
   }
 
   public async handleConnection(client: ClientWithUser): Promise<void> {
@@ -67,9 +91,18 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
       const chats = await this.chatClient.getChat(userId);
       const rooms = chats.list.map((chat) => `chat:${chat.id}`);
+      const chatIds = chats.list.map((chat) => chat.id);
 
       if (rooms.length > 0) {
         client.join(rooms);
+      }
+
+      client.data.chatIds = chatIds;
+
+      const { becameOnline } = this.presence.register(userId, client.id);
+
+      if (becameOnline) {
+        this.announcePresence(chatIds, { userId, online: true, lastSeen: null });
       }
 
       client.emit('chat:connected', { userId });
@@ -80,6 +113,20 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   public handleDisconnect(client: ClientWithUser): void {
-    this.logger.debug(`WS chat: сокет від'єднався (${client.id})`);
+    const userId = client.data.userId;
+
+    if (userId === undefined) {
+      return;
+    }
+
+    const result = this.presence.unregister(userId, client.id);
+
+    if (result?.becameOffline) {
+      this.announcePresence(client.data.chatIds, {
+        userId,
+        online: false,
+        lastSeen: result.lastSeen ? result.lastSeen.toISOString() : null,
+      });
+    }
   }
 }
