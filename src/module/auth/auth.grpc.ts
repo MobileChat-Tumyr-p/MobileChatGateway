@@ -12,21 +12,27 @@ import {
   VerifyCodeRequest,
   UpdateNickRequest,
   SearchPeopleRequest,
+  UserIdRequest,
   AuthResponse,
   TokensResponse,
   UserResponse,
   UserPreviewList,
+  UserPreviewReply,
   Empty,
 } from '@tumy/mobile-chat-grpc/gen/auth.js';
+import { getUserInfoServiceClient } from '@tumy/mobile-chat-grpc/gen/auth.js';
 
 @Injectable()
 export class AuthClientGrpc implements OnModuleInit {
   private authService: AuthServiceClient;
+  private getUserInfoService: getUserInfoServiceClient;
 
   constructor(@Inject('AUTH_PACKAGE') private readonly client: ClientGrpc) {}
 
   onModuleInit() {
     this.authService = this.client.getService<AuthServiceClient>('AuthService');
+    this.getUserInfoService =
+      this.client.getService<getUserInfoServiceClient>('getUserInfoService');
   }
 
   register(data: RegisterRequest): Promise<AuthResponse> {
@@ -63,5 +69,11 @@ export class AuthClientGrpc implements OnModuleInit {
 
   searchPeople(data: SearchPeopleRequest): Promise<UserPreviewList> {
     return firstValueFrom(this.authService.searchPeople(data));
+  }
+
+  getUserById(userId: number): Promise<UserPreviewReply> {
+    const request = { userId } as UserIdRequest;
+
+    return firstValueFrom(this.getUserInfoService.getUserById(request));
   }
 }
