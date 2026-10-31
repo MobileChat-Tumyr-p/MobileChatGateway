@@ -51,3 +51,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type UserCode = Prisma.UserCodeModel
+/**
+ * Model Call
+ * 
+ */
+export type Call = Prisma.CallModel
