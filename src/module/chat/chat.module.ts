@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ChatController } from './chat.controller.js';
 import { ChatClientGRCP } from './chat.grcp.js';
+import { ChatGateway } from './chat.gateway.js';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { AuthClientModule } from '../auth/auth.module.js';
@@ -40,6 +41,6 @@ import { AuthClientModule } from '../auth/auth.module.js';
     ]),
   ],
   controllers: [ChatController],
-  providers: [ChatClientGRCP],
+  providers: [ChatClientGRCP, ChatGateway],
 })
 export class ChatModule {}
